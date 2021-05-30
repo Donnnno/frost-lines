@@ -5,12 +5,33 @@
     <string name="license">License</string>
     <string name="code">Code</string>
     <string name="support">Support</string>
+    <string name="colormode">Color mode</string>
     <string name="description_code">This program\'s source code is available under the GNU General Public License v3.</string>
     <string name="description_images">The images included in this program are available under the Creative Commons Attribution Share Alike 4.0 License.</string>
-    <string translatable="false" name="url_support">https://www.paypal.com/paypalme/onnovdd</string>
-    <string translatable="false" name="url_repository">https://github.com/Donnnno/Arcticons</string>
-    <string translatable="false" name="url_gplv3">https://choosealicense.com/licenses/gpl-3.0</string>
-    <string translatable="false" name="url_ccbysa4">https://creativecommons.org/licenses/by-sa/4.0</string>
+    <string name="url_support" translatable="false">https://www.paypal.com/paypalme/onnovdd</string>
+    <string name="url_repository" translatable="false">https://github.com/Donnnno/Arcticons</string>
+    <string name="url_gplv3" translatable="false">https://choosealicense.com/licenses/gpl-3.0</string>
+    <string name="url_ccbysa4" translatable="false">https://creativecommons.org/licenses/by-sa/4.0</string>
     <string name="searchHint">Filter icons</string>
+    <string name="followSystem">Follow system theme</string>
+    <string name="dayMode">Day mode</string>
+    <string name="nightMode">Night mode</string>
+    <string name="colorMode">Icon color</string>
     <bool name="config_iconpack">true</bool>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

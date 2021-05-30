@@ -1,9 +1,9 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorPrimaryDark</item>
-        <item name="colorControlHighlight">#3Fffffff</item>
+        <item name="colorControlHighlight">#ffffff</item>
     </style>
 </resources>

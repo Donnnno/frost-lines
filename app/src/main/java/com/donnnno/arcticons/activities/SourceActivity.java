@@ -27,13 +27,13 @@ public class SourceActivity extends BaseActivity {
         baseLayout.setOrientation(LinearLayout.VERTICAL);
         baseLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         baseLayout.setGravity(Gravity.CENTER);
-        baseLayout.setBackgroundColor(getResources().getColor(R.color.colorLight));
+        baseLayout.setBackgroundColor(getResources().getColor(R.color.backgroundColor));
         setContentView(baseLayout);
 
         //Code
         CenterButton code = new CenterButton(this);
-        code.setForeground(R.color.textDark);
-        code.setBackground(R.color.colorDark);
+        code.setForeground(R.color.textColor);
+        code.setBackground(R.color.backgroundColor);
         code.setText(R.string.code);
         code.setIcon(R.drawable.ic_code_button);
         code.setOnClickListener((v) -> IntentUtils.openUrl(this, R.string.url_repository));
@@ -41,8 +41,8 @@ public class SourceActivity extends BaseActivity {
 
         //License
         CenterButton license = new CenterButton(this);
-        license.setForeground(R.color.textDark);
-        license.setBackground(R.color.colorDark);
+        license.setForeground(R.color.textColor);
+        license.setBackground(R.color.backgroundColor);
         license.setText(R.string.license);
         license.setIcon(R.drawable.ic_license_button);
         license.setOnClickListener((v) -> IntentUtils.openActivity(this, LicenseActivity.class));

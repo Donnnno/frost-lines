@@ -21,20 +21,20 @@ public class LicenseActivity extends BaseActivity {
         baseLayout.setOrientation(LinearLayout.VERTICAL);
         baseLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
         baseLayout.setGravity(Gravity.START);
-        baseLayout.setBackgroundColor(getResources().getColor(R.color.colorLight));
+        baseLayout.setBackgroundColor(getResources().getColor(R.color.backgroundColor));
         setContentView(baseLayout);
 
         CenterButton code = new CenterButton(this);
-        code.setForeground(R.color.textDark);
-        code.setBackground(R.color.colorDark);
+        code.setForeground(R.color.textColor);
+        code.setBackground(R.color.backgroundColor);
         code.setText(R.string.description_code);
         code.disableIcon();
         code.setOnClickListener((v) -> IntentUtils.openUrl(this, R.string.url_gplv3));
         baseLayout.addView(code);
 
         CenterButton images = new CenterButton(this);
-        images.setForeground(R.color.textDark);
-        images.setBackground(R.color.colorDark);
+        images.setForeground(R.color.textColor);
+        images.setBackground(R.color.backgroundColor);
         images.setText(R.string.description_images);
         images.disableIcon();
         images.setOnClickListener((v) -> IntentUtils.openUrl(this, R.string.url_ccbysa4));

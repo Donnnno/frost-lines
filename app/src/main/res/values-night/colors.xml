@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
 
-    <!-- Light Mode -->
-    <color name="textColor">#000000</color>
-    <color name="backgroundColor">#FFFFFF</color>
+    <!-- Dark Mode -->
+    <color name="textColor">#FFFFFF</color>
+    <color name="backgroundColor">#000000</color>
 </resources>

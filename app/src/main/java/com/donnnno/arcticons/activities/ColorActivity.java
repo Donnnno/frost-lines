@@ -1,51 +1,123 @@
 package com.donnnno.arcticons.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import android.widget.RadioButton;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
+import com.donnnno.arcticons.ui.fragments.MainPreferencesFragment;
+import com.donnnno.arcticons.ui.fragments.PreferencesFragment;
 import com.donnnno.arcticons.R;
 
-public class ColorActivity extends BaseActivity
-{
-    RadioButton DayMode, NightMode, FollowSystem;
+public class ColorActivity extends MainActivity implements
+        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+    private Fragment _fragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.color_modes);
-        DayMode = findViewById(R.id.dayMode);
-        NightMode = findViewById(R.id.nightMode);
-        FollowSystem = findViewById(R.id.followSystem);
-    }
+        setContentView(R.layout.activity_preferences);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
-    public void onRadioButtonClicked(View view)
-    {
-        boolean checked = ((RadioButton) view).isChecked();
-        String msg = "";
-
-        switch (view.getId())
-        {
-            case R.id.dayMode:
-                if (checked)
-                    msg = "Day mode activated";
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-            case R.id.nightMode:
-                if (checked)
-                    msg = "Night mode activated";
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-            case R.id.followSystem:
-                if (checked)
-                    msg = "System mode activated";
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+
+        if (savedInstanceState == null) {
+            _fragment = new MainPreferencesFragment();
+            _fragment.setArguments(getIntent().getExtras());
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content, _fragment)
+                    .commit();
+
+            PreferencesFragment requestedFragment = getRequestedFragment();
+            if (requestedFragment != null) {
+                _fragment = requestedFragment;
+                showFragment(_fragment);
+            }
+        } else {
+            _fragment = getSupportFragmentManager().findFragmentById(R.id.content);
+        }
     }
-}
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setTitle(R.string.action_settings);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // pass permission request results to the fragment
+        _fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(final Bundle inState) {
+        if (_fragment instanceof PreferencesFragment) {
+            // pass the stored result intent back to the fragment
+            if (inState.containsKey("result")) {
+                ((PreferencesFragment) _fragment).setResult(inState.getParcelable("result"));
+            }
+        }
+        super.onRestoreInstanceState(inState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        if (_fragment instanceof PreferencesFragment) {
+            // save the result intent of the fragment
+            // this is done so we don't lose anything if the fragment calls recreate on this activity
+            outState.putParcelable("result", ((PreferencesFragment) _fragment).getResult());
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+        _fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(), pref.getFragment());
+        _fragment.setArguments(pref.getExtras());
+        _fragment.setTargetFragment(caller, 0);
+        showFragment(_fragment);
+
+        setTitle(pref.getTitle());
+        return true;
+    }
+
+    private void showFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right)
+                .replace(R.id.content, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @SuppressWarnings("unchecked")
+    private PreferencesFragment getRequestedFragment() {
+        Class<? extends PreferencesFragment> fragmentType = (Class<? extends PreferencesFragment>) getIntent().getSerializableExtra("fragment");
+        if (fragmentType == null) {
+            return null;
+        }
+
+        try {
+            return fragmentType.newInstance();
+        } catch (IllegalAccessException | InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+    }

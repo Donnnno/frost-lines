@@ -1,9 +1,30 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorPrimaryDark</item>
         <item name="colorControlHighlight">#ffffff</item>
+    </style>
+
+    <style name="Theme.Arcticons.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAppBar">@color/colorPrimary</item>
+    </style>
+
+    <style name="Theme.Arcticons.Light.Default" />
+
+    <style name="Theme.Arcticons.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/black</item>
+    </style>
+
+    <style name="Theme.Arcticons.Dark" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAppBar">@color/colorPrimary</item>
+    </style>
+    <style name="Theme.Arcticons.Dark.Default" />
+
+    <style name="Theme.Arcticons.Dark.NoActionBar">
+        <item name="android:statusBarColor">@android:color/black</item>
     </style>
 </resources>
